@@ -1,0 +1,12 @@
+[flake8]
+application-import-names = about,catalog,homepage,lyceum,core
+max-line-length = 79
+exclude = 
+    .venv,
+    .git,
+    __pycache__,
+    build,
+    dist,
+    */migrations/,
+inline-quotes = double
+import-order-style = google
