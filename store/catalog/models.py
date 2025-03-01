@@ -18,12 +18,16 @@ class Item(models.Model):
     description = models.TextField(
         "описание",
         max_length=512,
+        help_text="Максимум 512 символов",
     )
-    price = models.IntegerField(
+    price = models.DecimalField(
         "стоимость",
+        max_digits=20,
+        decimal_places=2,
         validators=[
             validators.MinValueValidator(0),
         ],
+        help_text="Стоимость в долларах (2 знака после точки)",
     )
 
     payment_price_id = models.CharField(

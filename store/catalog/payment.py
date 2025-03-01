@@ -22,7 +22,10 @@ class ItemPayment:
     def create_price(item, product):
         try:
             return stripe.Price.create(
-                unit_amount=item.price,
+                unit_amount=int(
+                    item.price
+                    * (10**item.__class__.price.field.decimal_places),
+                ),
                 currency="usd",
                 product=product,
             )

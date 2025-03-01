@@ -3,7 +3,7 @@
 {% block "content" %}
 <h1>{{ item.name }}</h1>
 <div>{{ item.description|safe }}</div>
-<div>{{ item.price }}</div>
+<div>$ {{ item.price }}</div>
 <button id="buy-button" type="button" data-stripe-token="{{ stripe_public_key }}" data-price-id="{{ item.payment_price_id }}">Купить</button>
 <script>
   const buy_button = document.getElementById("buy-button");

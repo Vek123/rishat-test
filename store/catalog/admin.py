@@ -16,6 +16,4 @@ class ItemAdmin(admin.ModelAdmin):
         Item.name.field.name,
         Item.price.field.name,
     )
-    list_display_links = (
-        Item.name.field.name,
-    )
+    list_display_links = (Item.name.field.name,)
