@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block "content" %}
+<h1>Список товаров</h1>
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+  {% for item in items %}
+    {% include "includes/item_card.html" with item=item only%}
+  {% endfor %}
+</div>
+{% endblock %}

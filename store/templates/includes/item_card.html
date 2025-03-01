@@ -1,0 +1,5 @@
+<div style="border: 1px solid black;">
+  <div>{{ item.name }}</div>
+  <div>{{ item.price }}</div>
+  <a href="{% url 'catalog:item_detail' pk=item.id %}">Перейти</a>
+</div>

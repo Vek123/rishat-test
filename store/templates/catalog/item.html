@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block "content" %}
+<h1>{{ item.name }}</h1>
+<div>{{ item.description|safe }}</div>
+<div>{{ item.price }}</div>
+<button id="buy-button" type="button" data-stripe-token="{{ stripe_public_key }}" data-price-id="{{ item.payment_price_id }}">Купить</button>
+<script>
+  const buy_button = document.getElementById("buy-button");
+  const token = buy_button.dataset.stripeToken;
+  console.log(buy_button);
+  const price_id = buy_button.dataset.priceId;
+  const stripe = Stripe(token);
+  buy_button.addEventListener("click", function() {
+    fetch(`/buy/${price_id}/`, {method: "GET"})
+    .then(response => response.json())
+    .then(session => stripe.redirectToCheckout({"sessionId": session.id}))
+  });
+</script>
+{% endblock %}

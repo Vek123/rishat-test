@@ -14,7 +14,7 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 
 ALLOWED_HOSTS = env.list(
     "DJANGO_ALLOWED_HOSTS",
-    ["127.0.0.1", "localhost"],
+    default=["127.0.0.1", "localhost"],
 )
 
 INSTALLED_APPS = [
@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # User's applications
+    "catalog.apps.CatalogConfig",
 ]
 
 MIDDLEWARE = [
@@ -41,7 +43,7 @@ ROOT_URLCONF = "store.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -97,3 +99,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+STRIPE_PUBLIC_API_KEY = env.str("STRIPE_PUBLIC_API_KEY", "STRIPE")
+
+STRIPE_SECRET_API_KEY = env.str("STRIPE_SECRET_API_KEY", "STRIPE")
