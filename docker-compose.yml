@@ -10,6 +10,10 @@ services:
       - backend
     volumes:
       - static_volume:/app/store/static
+      - ./db.sqlite3:/app/store/db.sqlite3
+    command: sh -c "python manage.py makemigrations &&
+                python manage.py migrate &&
+                gunicorn store.wsgi:application --bind 0.0.0.0:8000"
 
   nginx:
     image: nginx:latest
