@@ -48,6 +48,13 @@ class Item(models.Model):
         self.payment_price_id = price.id
         super().save(*args, **kwargs)
 
+    def delete(self, *args, **kwargs):
+        res = super().delete(*args, **kwargs)
+        price = ItemPayment.get_price(self.payment_price_id)
+        product = ItemPayment.get_product(price.product)
+        ItemPayment.delete_product(product.id)
+        return res
+
     def __str__(self):
         name = self.name[:20].strip()
         return name.strip(string.punctuation)
