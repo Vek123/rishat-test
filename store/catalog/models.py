@@ -1,3 +1,5 @@
+import string
+
 from django.core import validators
 from django.db import models
 
@@ -41,3 +43,7 @@ class Item(models.Model):
         price = ItemPayment.create_price(self, product)
         self.payment_price_id = price.id
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        name = self.name[:20].strip()
+        return name.strip(string.punctuation)

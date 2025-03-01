@@ -1,0 +1,30 @@
+services:
+  app:
+    image: vek123/rishat-test-django:latest
+    restart: "on-failure"
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    networks:
+      - backend
+    volumes:
+      - static_volume:/app/store/static
+
+  nginx:
+    image: nginx:latest
+    restart: "on-failure"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - static_volume:/home/app/store/static
+    ports:
+      - "80:80"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  static_volume:

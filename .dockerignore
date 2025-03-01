@@ -1,0 +1,6 @@
+.env
+.gitignore
+template.env
+Dockerfile
+nginx.conf
+store/db.sqlite3
